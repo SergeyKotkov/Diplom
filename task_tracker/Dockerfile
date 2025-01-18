@@ -7,8 +7,8 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
-# Установите gunicorn
 RUN pip install gunicorn
+COPY .env /app/
 
 COPY . /app/
 
