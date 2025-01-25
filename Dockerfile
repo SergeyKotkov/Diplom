@@ -5,11 +5,12 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 COPY requirements.txt /app/
+
 RUN pip install -r requirements.txt
 
-RUN pip install gunicorn
 COPY .env /app/
 
-COPY . /app/
+COPY task_tracker /app/task_tracker
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "task_tracker.wsgi:application"]
+# Команда для запуска приложения с использованием manage.py
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
